@@ -1,7 +1,13 @@
-# Glory Arogundade — MIT 8103
+# Church Management System Database Exercise
 
-Student ID: 301908292
+Glory Arogundade · Student ID 301908292
 
-Church Management System: A church administration system designed to manage members, workers, departments, attendance and church activities.
+The portfolio uses fictional records for Church Management System Database Exercise.
 
-The portfolio is being generated. Completed stages will appear in the commit history.
+- [Portfolio 1](portfolio-1-database-design/)
+- [Portfolio 2](portfolio-2-query-optimisation/)
+- [Portfolio 3](portfolio-3-transactions-concurrency/)
+- [Portfolio 4](portfolio-4-nosql/)
+- [Portfolio 5](portfolio-5-distributed-cloud/)
+
+[Final summary](Arogundade_Glory_301908292_FinalSummary.md) · [PDF](Arogundade_Glory_301908292_FinalSummary.pdf)
