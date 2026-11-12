@@ -1,5 +1,16 @@
 # Church Management System Database Exercise — SQL queries
 
+I ran three SQL queries against the Portfolio 1 sample data, then measured how much an index
+changed the cost of a lookup.
+
+| Query | What it demonstrates |
+| --- | --- |
+| 1 | A JOIN across three tables — attendance, member and activity — to show that the foreign keys return related information as one row |
+| 2 | A filter on `session_date`, the equality lookup the index test later targets |
+| 3 | A `GROUP BY` aggregate, counting attendance records per member |
+
+Each query below is followed by the rows it returned.
+
 ## 1. Show related attendance, member, activity records (up to 20).
 
 ```sql
@@ -47,6 +58,16 @@ LIMIT 20;
 | --- | --- |
 | 201 | 1 |
 
+
+## Why the index test uses a separate table
+
+The sample data holds only a handful of rows, so timing a query against it would measure nothing
+useful — PostgreSQL would read the whole table either way. The optimisation script therefore builds
+a separate table, `query_lab.attendance`, with 20,000 generated rows spread across 1,000 distinct
+session dates, and runs the comparison there. The Portfolio 1 tables are left untouched.
+
+The index is `p2_filter_idx`, a btree on `session_date`. The comparison below reports the median of
+three runs in each phase, with the `EXPLAIN (ANALYZE, BUFFERS)` output for every run in full.
 
 ## Index comparison
 
