@@ -1,10 +1,10 @@
 # MIT 8103 Advanced Database Systems
 
-**Church Management System Database Exercise** · Glory Arogundade · Student ID 301908292
+**Individual Practical Database Portfolio** · Glory Arogundade · Student ID 301908292
 
 ## Case study
 
-As part of this assignment I have designed my own case study to show my understanding. I choose a Church Management System Database as this is something I’ve been thinking about. This database allows for an improved way of managing records for church Members, Workers, Departments and Activities. It will be used by the Administrators to look at Member, Department, Activity Coordinators to plan programme and track attendance, and Workers.
+As part of this assignment, considering we were given the option to use a different case study from what was given, I have designed my own case study to show my understanding. I choose a Church Management System Database as this is something I’ve been thinking about recently. This database allows for an improved way of managing records for church Members, Workers, Departments and Activities. It will be used by the Administrators to look at Member, Department, Activity Coordinators to plan programme and track attendance, and Workers.
 
 I created 5 tables which are Department, Member, Worker, Activity, and Attendance. This helps with adding new members, assigning Workers to a department, planning activities for each department, and keeping track of attendance. This database can be used to look up attendance for specific activities, dates and departments.
 
