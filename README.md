@@ -4,15 +4,15 @@
 
 ## Case study
 
-Considering we were allowed to choose our own case study for this assignment, I decided to work with something I had already been thinking about for some time, a Church Management System Database. The idea came from the need to have a better way of keeping track of church records, especially members, workers, departments and activities. The database is designed for church administrators who handle member and department records, activity coordinators who plan programmes and monitor attendance, and workers who support the day-to-day activities of the church.
+As part of this assignment I have designed my own case study to show my understanding. I choose a Church Management System Database as this is something I’ve been thinking about. This database allows for an improved way of managing records for church Members, Workers, Departments and Activities. It will be used by the Administrators to look at Member, Department, Activity Coordinators to plan programme and track attendance, and Workers.
 
-For this exercise, I created five tables: Department, Member, Worker, Activity, and Attendance. They are connected to make it easier to register members, assign workers to department, schedule departmental activities and record attendance. The database can also be used to check attendance for a particular activity, date or department.
+I created 5 tables which are Department, Member, Worker, Activity, and Attendance. This helps with adding new members, assigning Workers to a department, planning activities for each department, and keeping track of attendance. This database can be used to look up attendance for specific activities, dates and departments.
 
 ## Portfolio 1: Database Design and Modelling
 
-I started by organising the database into five related tables. Each table has a primary key to uniquely identify its records, while foreign keys help maintain the relationships between the tables. I also included checks to make sure that certain rules are followed when data is entered. For examples, the attendance status is restricted to three options: Present, Absent or Excused.
+I created 5 tables with links between them. Each table has a primary key to make sure there are no duplicates and foreign keys to make sure the relationships between tables are maintained. There are also checks within the database to make sure certain rules are followed such as attendance being set to Present, Absent or Excused.
 
-I also used sample data to demonstrate how the database can be organised through the three stages of normalisation: 1NF, 2NF and 3NF. To test the database, I attempted 14 invalid insert operations, and all were rejected without affecting the existing valid records.
+I also used test data to show how the data can be designed to be in 1NF, 2NF and 3NF. I tried to add 14 incorrect records to the database but they were all refused so the correct data remained.
 
 ![Church Management System Database Exercise ER diagram](images/Arogundade_Glory_301908292_ERDiagram.png)
 
@@ -22,48 +22,48 @@ Figure 1. Tables, keys and relationships. PK: primary key; FK: foreign key; UK: 
 
 ## Portfolio 2: Query Processing and Optimisation
 
-I also ran three SQL queries to test how the database works with the sample records. One of the queries used a JOIN to retrieve related information from different tables, and it returned one record showing Alex's attendance at the community gathering.
+I created 3 SQL queries. One of them used a JOIN statement to return related data. This returned 1 record showing Alex attended the community gathering.
 
-For the index performance test, I used a separate set of 20,000 records to compare how quickly data could be retrieved before and after creating an index. The median lookup time reduced from 0.941ms to 0.167ms after the index was added. Both tests returned the same records, and the execution plan confirmed that the new index was being used. These results are based on the particular lookup and test environment I used.
+I also created a test with 20,000 records of a different set of data. Adding an index decreased the Median time to 0.167 from 0.941. The same data was shown and the Execution Plan showed that the new index was being used.
 
 ## Portfolio 3: Transactions and Concurrency
 
-For Transactions and Concurrency, I used a temporary counter in the attendance table to test how database transactions work. I carried out tests using COMMIT, ROLLBACK and READ COMMITTED isolation. During the test, an update that had not yet been committed could not be seen by the other session. When I used ROLLBACK, the counter returned to its previous saved value.
+I created a temporary count column in the attendance table. I tested using Commit, Rollback and Read Committed. When trying to update the data with the uncommitted transaction it was not visible in the other session. When using Rollback it rolled back to the previous count.
 
-I also tested what happens when two sessions try to update the same record at the same time. Without locking, both increments resulted in a final value of 2 instead of 3. However, after using SELECT FOR UPDATE, session B had to wait for session A to finish before making its update, and the final counter value was correctly recorded as 3. The temporary counter was only used for these exercises and did not change the original business fields of the case study.
+I also tried to update the same record in 2 sessions. Without any locks in place both sessions increased the count so it was 2 instead of 3. Using SELECT FOR UPDATE meant session B had to wait for session A to complete its changes. This meant the count was correct as it was 3. The count was temporary and did not effect any of the real business columns.
 
 ## Portfolio 4: NoSQL and Advanced Data Models
 
-Here I used church_activity_events to store event information for the church management system. MongoDB inserted 2 sample events and ran 4 queries, all of which returned the expected results.
+I used the church_activity_events table to store data relating to events in the church management system. I added 2 sample events to MongoDB. 4 queries were run which all returned the correct data.
 
-I also tested the validation rules by trying to insert an event with an invalid date format and another with an event ID that already existed. Both were rejected. One thing I demonstrated was how related information can be stored together within an event using embedded snapshots, while the details field can contain different information depending on the type of event. The events used were fictional, and PostgreSQL remained responsible for enforcing the original relational database rules.
+I tested adding some validation rules. Adding an event with an incorrect date format and duplicate event ID was refused. I showed how related data can be stored in an event using embedded snapshots. The details column can also include different types of data depending on the event. The events used were fictional but the original rules from the relational database were still enforced by PostgreSQL.
 
 ## Repository and evidence
 
 https://github.com/RubydDesigner/Arogundade_Glory_301908292
 
-The portfolio folders contain the SQL and JavaScript, explanations, query plans, result tables and screenshots.
+The portfolios contain the SQL, JavaScript, explanations, query plans, result tables and screenshots.
 
 
 <!-- PAGE BREAK -->
 
 ## Portfolio 5: Distributed and Cloud Database Exercise
 
-Here I discussed how the church database could be made more reliable by using three MongoDB replica members across separate failure zones. I covered how primary elections work, majority acknowledgement, delays in secondary updates and the advantages and disadvantages of sharding for the church_activity_events collection.
+I discussed how I would improve the reliability of the church database by having 3 replica members in MongoDB. I explained how primary elections take place, majority acknowledgement, how long it takes for the secondaries to update, and the advantages and disadvantages of sharding the church_activity_events collection.
 
-I also explained that replication helps keep the database available when one member becomes unavailable, while backups are still needed to recover lost data. PostgreSQL would also need its own plan for availability and recovery. This is the permitted discussion option, so I did not set up an actual replica set or carry out a live failover test.
+Having replicas will make sure the database is available if one member fails. Backups will still need to be done to recover any data that has been lost. PostgreSQL will also need its own plan for availability and recovery. As a result I did not actually create a replica set or test live failover. This was the option I was able to discuss.
 
-## Individual reflection
+## Personal reflection
 
-While working on this project, I realised the importance of keeping related information properly organised in a database. I used separate tables for Department, Member, Worker, Activity and Attendance so that the information could be managed without unnecessary repetition. I also added rules to ensure that the attendance could only be recorded as Present, Absent or Excused, and tested the database to make sure these rules and the links between records were working correctly.
+Throughout this project I realised how important it is to store related data correctly. I created 5 tables for Department, Member, Worker, Activity and Attendance to make sure there was no duplication of data. Rules were added to make sure attendance can only be set to Present, Absent or Excused. I also tested the database to make sure the rules and relationships were working.
 
-One thing I learnt from the two-session exercise was how easily database records can be affected when two users try to update the same information at the same time. Both sessions initially read the same value, which caused an issue with the final result. Using row locking helped prevent this and ensured that both updates were properly recorded.
+When completing the 2 sessions exercise I learnt how easy it is for data to be affected when 2 users are trying to update the same data. Both sessions had the same starting value which caused issues with the final value. Using row locks helped stop this from happening and made sure both updates were recorded correctly.
 
-The Index comparison also helped me understand that getting the correct result is not the only thing that matters. It is equally important to consider how the database retrieves the information and whether it is doing so efficiently.
+The index comparison helped me realise how important it is to think about how the database is retrieving the data and if it is doing it efficiently even though getting the correct result is important.
 
 ## AI-use declaration
 
-I used GitHub Copilot and the portfolio generator to help prepare the database model, and scripts. The generator ran the PostgreSQL and MongoDB exercises, checked their outputs and captured the result images.  I remain responsible for checking and explaining the submitted work.
+GitHub Copilot and the portfolio generator were used to help create the database model and scripts. The generator ran through the PostgreSQL and MongoDB exercises, checked the results, and took screenshots. I am responsible for ensuring the work is checked and explained.
 
 ## References
 
